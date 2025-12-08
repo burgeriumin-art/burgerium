@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Burgerium - A modern cozy premium cafe experience. Gourmet burgers, artisanal coffee, and a vibe you can't resist.">
+    <title>Burgerium | Premium Cafe Experience</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <!-- Loader -->
+    <div id="loader">
+        <div class="loader-content">
+            <img src="logo.png" alt="Burgerium Logo" class="loader-logo">
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Burgerium">
+            </a>
+            <div class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">Story</a>
+                <a href="#menu">Menu</a>
+                <a href="#visit">Visit Us</a>
+                <a href="#contact" class="btn-primary">Reserve Table</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <img src="bg.png" alt="Cafe Interior">
+            <div class="overlay"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-text fade-in-up">
+                <span class="subtitle">Welcome to the future of taste</span>
+                <h1>Redefining <br> <span class="text-gradient">The Burger Experience</span></h1>
+                <p>Where premium meets cozy. Indulge in artisanal flavors in an atmosphere designed for moments that matter.</p>
+                <div class="hero-btns">
+                    <a href="#menu" class="btn-primary">Explore Menu</a>
+                    <a href="#about" class="btn-secondary">Our Philosophy</a>
+                </div>
+            </div>
+            <div class="hero-visual fade-in-up delay-2">
+                <!-- Using a card effect for the hero image -->
+                <div class="floating-card glass">
+                    <img src="burger.png" alt="Gourmet Burger">
+                    <div class="card-badge">
+                        <span class="star"><i class="fas fa-star"></i></span>
+                        <span>Signature</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-text scroll-reveal">
+                    <span class="section-tag">Since 2025</span>
+                    <h2>A New Chapter by <br> Burger Tree Brand</h2>
+                    <p>Burgerium is more than just a cafe; it's a sanctuary for food lovers. Born from the legacy of Burger Tree Brand, we are elevating the humble burger into a culinary masterpiece.</p>
+                    <p>Our spaces are crafted to feel like a warm embrace—modern yet cozy, premium yet accessible. Whether you're here for a quick bite or a long conversation, we've set the table for you.</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> Farm-to-Table Ingredients</li>
+                        <li><i class="fas fa-check-circle"></i> Artisanal Buns & Sauces</li>
+                        <li><i class="fas fa-check-circle"></i> Premium Coffee Blends</li>
+                    </ul>
+                </div>
+                <div class="col-image scroll-reveal delay-2">
+                    <div class="image-stack">
+                        <img src="bg.png" alt="Interior Vibe" class="img-back">
+                        <div class="experience-card glass">
+                            <h3>4.9</h3>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>Customer Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <span>Premium Burgers</span>
+            <span class="separator">•</span>
+            <span>Artisanal Coffee</span>
+            <span class="separator">•</span>
+            <span>Cozy Vibes</span>
+            <span class="separator">•</span>
+            <span>Est. 2025</span>
+            <span class="separator">•</span>
+            <span>Fresh Ingredients</span>
+            <span class="separator">•</span>
+            <span>Premium Burgers</span>
+            <span class="separator">•</span>
+            <span>Artisanal Coffee</span>
+            <span class="separator">•</span>
+        </div>
+    </div>
+
+    <!-- Featured Menu Preview -->
+    <section id="menu" class="menu-preview section-padding">
+        <div class="container">
+            <div class="section-header center-text scroll-reveal">
+                <span class="section-tag">Taste the Magic</span>
+                <h2>Curated Selections</h2>
+            </div>
+            
+            <div class="menu-grid">
+                <!-- Item 1 -->
+                <div class="menu-card glass scroll-reveal">
+                    <div class="card-image">
+                        <img src="burger.png" alt="Classic Royal">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-header">
+                            <h3>The Royal Truffle</h3>
+                            <span class="price">$18</span>
+                        </div>
+                        <p class="description">Wagyu beef patty, black truffle mayo, caramelized onions, aged cheddar.</p>
+                        <button class="btn-text">Order Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-card glass scroll-reveal delay-1">
+                    <div class="card-image">
+                        <!-- Placeholder for variety, reusing burger image but focusing differently via css if needed or just reusing -->
+                        <img src="burger.png" alt="Spicy chicken" style="filter: hue-rotate(45deg);"> 
+                    </div>
+                    <div class="card-info">
+                        <div class="card-header">
+                            <h3>Fiery Chicken Crisp</h3>
+                            <span class="price">$15</span>
+                        </div>
+                        <p class="description">Southern-style fried chicken, spicy maple glaze, pickled slaw, brioche.</p>
+                        <button class="btn-text">Order Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-card glass scroll-reveal delay-2">
+                    <div class="card-image">
+                        <img src="burger.png" alt="Vegan Delight" style="filter: grayscale(30%);">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-header">
+                            <h3>Green Garden</h3>
+                            <span class="price">$16</span>
+                        </div>
+                        <p class="description">Plant-based patty, smashed avocado, vegan sriracha mayo, sprouted grain bun.</p>
+                        <button class="btn-text">Order Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="logo.png" alt="Burgerium" class="footer-logo">
+                    <p>Elevating the burger experience one bite at a time.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <!-- ... other footer colums ... -->
+                 <div class="footer-col">
+                    <h4>Visit Us</h4>
+                    <p>123 Gourmet Avenue,<br>Flavor District, FD 45001</p>
+                    <p>+1 (555) 123-4567</p>
+                 </div>
+                 <div class="footer-col">
+                    <h4>Hours</h4>
+                    <p>Mon - Fri: 10am - 10pm</p>
+                    <p>Sat - Sun: 9am - 11pm</p>
+                 </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Burgerium. A Burger Tree Brand Company. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

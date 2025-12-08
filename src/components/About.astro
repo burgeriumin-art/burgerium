@@ -1,0 +1,183 @@
+<section id="about" class="about section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-text scroll-reveal">
+                <span class="section-tag">A Tale of Two Cities</span>
+                <h2>From Calicut to Chennai: <br> The Evolution</h2>
+                <p>It began in <b>1998</b> as a family passion in Calicut. Over the decades, <b>Burger Tree</b> grew into a sentiment, creating memories in <b>Coimbatore (Peelamedu & RS Puram)</b> and <b>Palakkad (Stadium Bypass)</b>.</p>
+                <div class="brand-evolution">
+                    <div class="brand-old">
+                        <img src="/burgertree_logo.png" alt="Burger Tree Original Logo" loading="lazy">
+                        <span>The Roots (1998)</span>
+                    </div>
+                    <div class="arrow">
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                    </div>
+                    <div class="brand-new">
+                        <img src="/logo.png" alt="Burgerium New Logo" loading="lazy">
+                        <span>The Future (2025)</span>
+                    </div>
+                </div>
+                <p>Now, we distill 25+ years of mastery into <b>Burgerium</b>. We aren't just opening a store in <b>Anna Nagar, Chennai</b>; we are bringing you the <i>Lava Cheese</i> you crave and the <i>Peri Peri</i> you love, elevated to an art form.</p>
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> Famous House-Made Buns</li>
+                    <li><i class="fas fa-check-circle"></i> The Original Coimby Taste</li>
+                    <li><i class="fas fa-check-circle"></i> Premium "Industrial-Cozy" Vibe</li>
+                    <li><i class="fas fa-check-circle"></i> 2.5k+ Five-Star Reviews</li>
+                </ul>
+            </div>
+            <div class="col-image scroll-reveal delay-2">
+                <div class="image-stack">
+                    <img src="/bg.png" alt="Interior Vibe" class="img-back" loading="lazy">
+                    <div class="experience-card glass">
+                        <h3>2.5k+</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>5-Star Reviews in Kovai & Palakkad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .about {
+        position: relative;
+        background: var(--bg-color);
+    }
+
+    .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .section-tag {
+        color: var(--accent-orange);
+        font-family: var(--font-body);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .col-text h2 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    .col-text p {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .brand-evolution {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin: 2.5rem 0;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+    }
+
+    .brand-old, .brand-new {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .brand-old img {
+        height: 60px;
+        opacity: 0.9;
+    }
+
+    .brand-new img {
+        height: 42px;
+        background-color: #FAA227;
+        padding: 4px 12px;
+        border-radius: 4px;
+        width: auto;
+    }
+
+    .brand-old span, .brand-new span {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+    }
+
+    .arrow {
+        font-size: 1.5rem;
+        color: var(--accent-orange);
+    }
+
+    .features-list {
+        margin-top: 2rem;
+    }
+
+    .features-list li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 1.05rem;
+    }
+
+    .features-list i {
+        color: var(--accent-orange);
+    }
+
+    .image-stack {
+        position: relative;
+    }
+
+    .image-stack .img-back {
+        border-radius: 8px;
+        opacity: 0.9;
+        border: 1px solid var(--glass-border);
+    }
+
+    .experience-card {
+        position: absolute;
+        bottom: -30px;
+        right: -30px;
+        padding: 2rem;
+        text-align: center;
+        min-width: 200px;
+        background: #111;
+        border: 1px solid var(--accent-orange);
+    }
+
+    .experience-card h3 {
+        font-size: 2.5rem;
+        color: var(--accent-orange);
+    }
+
+    .experience-card .stars {
+        color: var(--accent-orange);
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+        .row { grid-template-columns: 1fr; }
+        .col-text h2 { font-size: 2.6rem; }
+        .brand-evolution { flex-direction: column; gap: 1rem; text-align: center; }
+        .arrow { transform: rotate(90deg); }
+    }
+</style>

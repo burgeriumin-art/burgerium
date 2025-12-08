@@ -1,0 +1,13 @@
+# Dependencies
+node_modules
+
+# Builds / caches
+dist
+.astro
+.turbo
+.vite
+
+# OS / editor
+.DS_Store
+*.log
+*.tmp
