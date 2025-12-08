@@ -1,0 +1,155 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="anatomy-section">
+    <div class="container">
+        <div class="anatomy-header text-center">
+            <span class="eyebrow">Deconstructed Perfection</span>
+            <h2 class="title">Anatomy of a <span class="text-orange">Legend</span></h2>
+            <p class="subtitle">Every layer is a deliberate choice. No fillers. No shortcuts.</p>
+        </div>
+
+        <div class="anatomy-grid">
+            <!-- Left Labels -->
+            <div class="labels-col left">
+                <div class="label-item scroll-reveal slide-right">
+                    <h3>The Crown</h3>
+                    <p>Artisanal Brioche, toasted with French butter.</p>
+                </div>
+                <div class="label-item scroll-reveal slide-right delay-100">
+                    <h3>The Crunch</h3>
+                    <p>Hydroponic Lettuce & Heirloom Tomatoes.</p>
+                </div>
+                <div class="label-item scroll-reveal slide-right delay-200">
+                    <h3>The Melt</h3>
+                    <p>Double sharp cheddar, steam-melted.</p>
+                </div>
+            </div>
+
+            <!-- Center Image -->
+            <div class="visual-col">
+                <img src={`${base}/burger_exploded.png`} alt="Deconstructed Burger" class="exploded-img float-anim">
+            </div>
+
+            <!-- Right Labels -->
+            <div class="labels-col right">
+                <div class="label-item scroll-reveal slide-left delay-100">
+                    <h3>The Core</h3>
+                    <p>100% Angus Beef Blend. Flame-kissed.</p>
+                </div>
+                <div class="label-item scroll-reveal slide-left delay-200">
+                    <h3>The Secret</h3>
+                    <p>Our signature 1998 aioli sauce.</p>
+                </div>
+                <div class="label-item scroll-reveal slide-left delay-300">
+                    <h3>The Base</h3>
+                    <p>Structural integrity meets cloud-like softness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .anatomy-section {
+        background: radial-gradient(circle at center, #1a1a1a 0%, #050505 70%);
+        padding: 8rem 0;
+        overflow: hidden;
+    }
+
+    .anatomy-header {
+        margin-bottom: 5rem;
+        text-align: center;
+    }
+
+    .eyebrow {
+        color: var(--brand-orange);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.9rem;
+    }
+
+    .title {
+        font-size: 3.5rem;
+        margin: 1rem 0;
+        color: #fff;
+    }
+
+    .subtitle {
+        color: #888;
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .anatomy-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr 1fr;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .exploded-img {
+        width: 100%;
+        filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+        transform: scale(1.1);
+    }
+
+    .label-item {
+        margin-bottom: 4rem;
+        position: relative;
+    }
+
+    .label-item h3 {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .label-item p {
+        color: #aaa;
+        font-size: 0.95rem;
+    }
+
+    /* Directional Styling */
+    .left .label-item { text-align: right; }
+    .right .label-item { text-align: left; }
+
+    /* Connecting Lines (Pseudo-elements) */
+    .left .label-item::after, .right .label-item::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 60px;
+        height: 1px;
+        background: var(--brand-orange);
+        opacity: 0.5;
+    }
+
+    .left .label-item::after { right: -80px; }
+    .right .label-item::after { left: -80px; }
+
+    @media (max-width: 900px) {
+        .anatomy-grid {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .left .label-item, .right .label-item {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .left .label-item::after, .right .label-item::after {
+            display: none; /* Hide lines on mobile */
+        }
+        
+        .visual-col {
+            order: -1; /* Image first on mobile */
+            margin-bottom: 2rem;
+        }
+        
+        .exploded-img { max-width: 80%; margin: 0 auto; }
+    }
+</style>
