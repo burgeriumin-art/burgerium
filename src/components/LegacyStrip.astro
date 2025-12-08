@@ -1,0 +1,86 @@
+---
+---
+<div class="legacy-strip scroll-reveal">
+    <div class="container strip-content">
+        <div class="stat-item">
+            <span class="label">Est.</span>
+            <span class="value">1998</span>
+        </div>
+        <div class="separator"></div>
+        <div class="stat-item">
+            <span class="label">Origin</span>
+            <span class="value">Calicut</span>
+        </div>
+        <div class="separator"></div>
+        <div class="stat-item">
+            <span class="label">Legacy</span>
+            <span class="value">25 Yrs</span>
+        </div>
+        <div class="separator"></div>
+        <div class="stat-item">
+            <span class="label">Craft</span>
+            <span class="value">100% Fresh</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .legacy-strip {
+        border-top: 1px solid rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding: 2rem 0;
+        margin: 4rem 0;
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(5px);
+    }
+
+    .strip-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .label {
+        font-family: var(--font-body);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--brand-orange);
+        margin-bottom: 0.25rem;
+        opacity: 0.9;
+    }
+
+    .value {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        color: #fff;
+        line-height: 1;
+    }
+
+    .separator {
+        width: 1px;
+        height: 40px;
+        background: rgba(255,255,255,0.1);
+        transform: rotate(15deg);
+    }
+
+    @media (max-width: 768px) {
+        .strip-content {
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-around;
+        }
+        
+        .separator { display: none; }
+        
+        .stat-item { flex: 1 1 40%; }
+    }
+</style>

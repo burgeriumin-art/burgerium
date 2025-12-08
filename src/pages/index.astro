@@ -14,34 +14,34 @@ import Footer from '../components/Footer.astro';
     <Navigation />
     <main>
         <Hero />
-        <!-- Highlights removed for streamlined design -->
-        <About />
         
+        <!-- Loud Rolling Marquee (Restored & Moved Up) -->
         <div class="marquee-container">
             <div class="marquee">
                 <span>The Burger Tree Legacy</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>Calicut Roots (1998)</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>Coimbatore Favorites</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>Peelamedu & RS Puram</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>Palakkad Stadium Bypass</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>Opening Soon in Chennai</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>The Burger Tree Legacy</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>Calicut Roots (1998)</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>Coimbatore Favorites</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
                 <span>Peelamedu & RS Puram</span>
-                <span class="separator">•</span>
+                <span class="separator">✦</span>
             </div>
         </div>
 
+        <About />
         <Craft />
         <Anatomy />
         <Menu />
@@ -51,7 +51,7 @@ import Footer from '../components/Footer.astro';
 </Layout>
 
 <style>
-    /* Marquee Styles specific to page assembly */
+    /* Marquee Styles */
     .marquee-container {
         background: var(--brand-orange);
         color: #000;
@@ -59,8 +59,12 @@ import Footer from '../components/Footer.astro';
         overflow: hidden;
         white-space: nowrap;
         position: relative;
-        transform: rotate(-1deg) scale(1.02);
-        margin: 4rem 0;
+        z-index: 10;
+        border-top: 3px solid #000;
+        border-bottom: 3px solid #000;
+        transform: rotate(-2deg) scale(1.05); /* Aggressive tilt */
+        margin: -3rem 0 5rem 0;
+        box-shadow: 0 10px 0 rgba(0,0,0,0.5); /* Hard shadow */
     }
 
     .marquee {
@@ -70,10 +74,24 @@ import Footer from '../components/Footer.astro';
 
     .marquee span {
         font-family: var(--font-heading);
-        font-weight: 700;
-        font-size: 1.5rem;
+        font-weight: 900;
+        font-size: 2.2rem; /* Bigger */
         text-transform: uppercase;
-        margin: 0 1rem;
+        margin: 0 2rem;
+        letter-spacing: -1px;
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    /* Alternating styles for visual rhythm */
+    .marquee span:nth-child(even) {
+        -webkit-text-stroke: 1px #000;
+        color: transparent; /* Hollow text effect */
+    }
+
+    .separator {
+        display: none; /* Hide standard separator, using flex gap instead */
     }
 
     @keyframes marquee {
