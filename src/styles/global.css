@@ -15,6 +15,12 @@
     /* Wider for modern feel */
 }
 
+@media (max-width: 900px) {
+    :root {
+        --header-height: 80px; /* Smaller header for mobile */
+    }
+}
+
 * {
     margin: 0;
     padding: 0;

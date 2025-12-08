@@ -1,34 +1,46 @@
 ---
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <section class="craft-section">
     <div class="container">
-        <span class="sub-label">Our Secret Sauce</span>
-        <h2 class="section-title">The <span class="text-orange">Art</span> of The Burger</h2>
+        <span class="sub-label">The Difference</span>
+        <h2 class="section-title">Why We Are <span class="text-orange">Different</span></h2>
         
         <div class="craft-grid">
             <!-- Card 1 -->
             <div class="craft-card scroll-reveal">
                 <div class="card-visual">
-                    <img src={`${base}craft_buns.png`} alt="Baking Buns">
+                    <img src={`${base}/craft_buns.png`} alt="Baking Buns">
                     <div class="overlay-gradient"></div>
                 </div>
                 <div class="card-info">
                     <h3>House-Made Buns</h3>
-                    <p>We don't buy buns; we bake them. Fresh, every single morning. Soft, airy, and toasted to golden perfection.</p>
+                    <p>We bake our own buns fresh every morning. No preservatives, just soft, cloud-like perfection.</p>
                 </div>
             </div>
 
             <!-- Card 2 -->
+            <div class="craft-card scroll-reveal delay-100">
+                <div class="card-visual">
+                    <img src={`${base}/fresh_prep.png`} alt="Fresh Ingredients">
+                    <div class="overlay-gradient"></div>
+                </div>
+                <div class="card-info">
+                    <h3>Freshly Prepared</h3>
+                    <p>From farm to tray. We chop, slice, and prep our veggies and sauces daily. Validated freshness you can taste.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
             <div class="craft-card scroll-reveal delay-200">
                 <div class="card-visual">
-                    <img src={`${base}craft_grill.png`} alt="Flame Grilling">
+                    <img src={`${base}/craft_grill.png`} alt="Flame Grilling">
                     <div class="overlay-gradient"></div>
                 </div>
                 <div class="card-info">
                     <h3>Flame Grilled</h3>
-                    <p>No flat tops. Pure fire. Our patties are grilled over open flames for that signature smokey char you can't fake.</p>
+                    <p>Classic charcoal searing for that authentic smoky BBQ flavor. 100% real meat, zero fillers.</p>
                 </div>
             </div>
         </div>
@@ -36,32 +48,11 @@ const base = import.meta.env.BASE_URL;
 </section>
 
 <style>
-    .craft-section {
-        background: #0c0c0c;
-        padding: 6rem 0;
-        position: relative;
-    }
-
-    .sub-label {
-        display: block;
-        text-align: center;
-        color: var(--brand-orange);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .section-title {
-        text-align: center;
-        margin-bottom: 4rem;
-        font-size: 3rem;
-    }
-
+    /* ... existing styles ... */
     .craft-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+        grid-template-columns: repeat(3, 1fr); /* 3 Columns now */
+        gap: 2rem;
     }
 
     .craft-card {
@@ -116,7 +107,7 @@ const base = import.meta.env.BASE_URL;
         line-height: 1.6;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
         .craft-grid { grid-template-columns: 1fr; gap: 2rem; }
         .card-visual { height: 250px; }
     }
