@@ -1,7 +1,8 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<section class="reviews-section">
+<section class="reviews-section" style={`--reviews-bg: url('${base}/bg.png')`}>
     <div class="container">
         <h2 class="section-title center">Voices from the <span class="text-orange">South</span></h2>
         
@@ -9,12 +10,12 @@
             <!-- Review 1 -->
             <div class="review-card scroll-reveal">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"Hands down the best burger in Coimbatore. The bun is so soft it melts, and the beef patty is just... perfection."</p>
+                <p class="review-text">"Hands down the best burger I’ve had. The bun is so soft it melts, and the beef patty is just... perfection."</p>
                 <div class="reviewer">
                     <div class="avatar">A</div>
                     <div class="details">
                         <strong>Arjun Nair</strong>
-                        <small>Race Course Regular</small>
+                        <small>Heritage Regular</small>
                     </div>
                 </div>
             </div>
@@ -22,7 +23,7 @@
             <!-- Review 2 -->
             <div class="review-card scroll-reveal delay-100">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"I drive from Palakkad just for the Loaded Fries and Lava Cheese. Worth every kilometer. Can't wait for Chennai!"</p>
+                <p class="review-text">"I drive in just for the Loaded Fries and Lava Cheese. Worth every kilometer. Chennai is going to love this."</p>
                 <div class="reviewer">
                     <div class="avatar">D</div>
                     <div class="details">
@@ -35,7 +36,7 @@
             <!-- Review 3 -->
             <div class="review-card scroll-reveal delay-200">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"Finally, a real burger place. No frozen patties, just fresh meat and great vibes. The legacy is real."</p>
+                <p class="review-text">"Finally, a real burger place. No frozen patties, just fresh meat, great vibes, and a crew that knows its craft."</p>
                 <div class="reviewer">
                     <div class="avatar">R</div>
                     <div class="details">
@@ -51,7 +52,7 @@
 <style>
     .reviews-section {
         padding: 5rem 0;
-        background: url('/burgerium/bg.png') center/cover fixed no-repeat;
+        background: var(--reviews-bg, url('/bg.png')) center/cover fixed no-repeat;
         position: relative;
     }
 
