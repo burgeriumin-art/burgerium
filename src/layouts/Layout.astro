@@ -18,18 +18,44 @@ const {
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://burgerium.in');
+const siteUrl = site.href.replace(/\/$/, '');
 const canonicalURL = new URL(Astro.url.pathname, site);
 const ogImageURL = new URL(image, site);
 const logoURL = new URL(`${base}/logo.png`, site);
 
+const address = {
+	'@type': 'PostalAddress',
+	streetAddress: 'E Merck House, Haddows 2nd Street, Nungambakkam',
+	addressLocality: 'Chennai',
+	addressRegion: 'Tamil Nadu',
+	postalCode: '600006',
+	addressCountry: 'IN',
+};
+
 const structuredData = {
 	'@context': 'https://schema.org',
-	'@type': 'Organization',
-	name: 'Burgerium',
-	url: site.href,
-	logo: logoURL.href,
-	image: ogImageURL.href,
-	description,
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${siteUrl}/#website`,
+			url: siteUrl,
+			name: 'Burgerium',
+			description,
+			inLanguage: 'en-IN',
+		},
+		{
+			'@type': 'Restaurant',
+			'@id': `${siteUrl}/#restaurant`,
+			name: 'Burgerium',
+			url: siteUrl,
+			logo: logoURL.href,
+			image: ogImageURL.href,
+			description,
+			servesCuisine: 'Burgers',
+			address,
+			areaServed: 'Chennai',
+		},
+	],
 };
 ---
 
