@@ -32,6 +32,8 @@ const address = {
 	addressCountry: 'IN',
 };
 
+const menuUrl = `${siteUrl}/#menu`;
+
 const structuredData = {
 	'@context': 'https://schema.org',
 	'@graph': [
@@ -42,6 +44,7 @@ const structuredData = {
 			name: 'Burgerium',
 			description,
 			inLanguage: 'en-IN',
+			publisher: { '@id': `${siteUrl}/#restaurant` },
 		},
 		{
 			'@type': 'Restaurant',
@@ -49,11 +52,13 @@ const structuredData = {
 			name: 'Burgerium',
 			url: siteUrl,
 			logo: logoURL.href,
-			image: ogImageURL.href,
+			image: [ogImageURL.href],
 			description,
-			servesCuisine: 'Burgers',
+			servesCuisine: ['Burgers'],
 			address,
-			areaServed: 'Chennai',
+			areaServed: 'Chennai, Tamil Nadu',
+			hasMenu: menuUrl,
+			mainEntityOfPage: canonicalURL.href,
 		},
 	],
 };
@@ -87,9 +92,7 @@ const structuredData = {
 		<meta name="twitter:image" content={ogImageURL.href} />
 		<meta name="twitter:image:alt" content="Burgerium logo on brand orange" />
 
-		<script type="application/ld+json" is:inline>
-			{JSON.stringify(structuredData)}
-		</script>
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 
         <!-- Preconnect for performance -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
