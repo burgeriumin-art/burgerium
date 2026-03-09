@@ -34,11 +34,33 @@
         font-size: 17px;
         /* Smaller header for mobile */
     }
+
+    .section-padding {
+        padding: 4.75rem 0;
+    }
+
+    .container {
+        padding: 0 1.35rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 0.95rem 1.5rem;
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 600px) {
     :root {
         font-size: 18px;
+    }
+
+    .section-padding {
+        padding: 4rem 0;
+    }
+
+    .container {
+        padding: 0 1rem;
     }
 }
 
@@ -252,6 +274,7 @@ textarea:focus-visible {
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    will-change: transform;
 }
 
 .btn-primary:hover {

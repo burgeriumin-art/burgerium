@@ -210,14 +210,14 @@ const structuredData = {
                 btns.forEach((btn) => {
                     btn.addEventListener('mousemove', (e) => {
                         const position = (btn as HTMLElement).getBoundingClientRect();
-                        const x = (e as MouseEvent).pageX - position.left - position.width / 2;
-                        const y = (e as MouseEvent).pageY - position.top - position.height / 2;
+                        const x = (e as MouseEvent).clientX - position.left - position.width / 2;
+                        const y = (e as MouseEvent).clientY - position.top - position.height / 2;
 
-                        (btn as HTMLElement).style.transform = `translate(${x * 0.3}px, ${y * 0.5}px) scale(1.05)`;
+                        (btn as HTMLElement).style.transform = `translate3d(${x * 0.12}px, ${y * 0.18}px, 0) scale(1.05)`;
                     });
 
-                    btn.addEventListener('mouseout', () => {
-                        (btn as HTMLElement).style.transform = 'translate(0px, 0px) scale(1)';
+                    btn.addEventListener('mouseleave', () => {
+                        (btn as HTMLElement).style.transform = 'translate3d(0px, 0px, 0) scale(1)';
                     });
                 });
             }

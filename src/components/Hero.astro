@@ -4,7 +4,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <section id="home" class="hero-wrapper" aria-label="Welcome to Burgerium">
-    <!-- Dynamic Background -->
     <div class="bg-layer" aria-hidden="true">
         <img
             src={`${base}/chennai_hero.png`}
@@ -17,54 +16,60 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </div>
 
     <div class="container hero-grid">
-        <!-- Text Content -->
         <div class="hero-text">
-            <div class="launch-badge slide-in-1">
-                Chennai Launch • Q1 2025
+            <div class="hero-copy-shell">
+                <div class="launch-badge slide-in-1">
+                    Chennai Launch • Q1 2025
+                </div>
+                <h1 class="mega-title">
+                    <span class="line slide-in-2">Every Bite</span>
+                    <span class="line accent slide-in-3">Counts.</span>
+                </h1>
+
+                <p class="hero-desc slide-in-4">
+                    25 years of craft. House-baked buns. Charcoal-seared patties. Chennai's new burger destination.
+                </p>
+
+                <div class="hero-highlights slide-in-5" aria-label="Burgerium highlights">
+                    <span>25+ years of burger craft</span>
+                    <span>House-baked buns every day</span>
+                    <span>Digital menu now live</span>
+                </div>
+
+                <div class="hero-actions slide-in-5">
+                    <a
+                        href={instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-primary hero-cta"
+                    >
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                        Follow {instagramHandle}
+                    </a>
+                    <a href="/menu" class="hero-link">
+                        Browse Menu
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
-            <h1 class="mega-title">
-                <span class="line text-gradient slide-in-2">Every Bite Counts.</span>
-            </h1>
-
-            <p class="hero-desc slide-in-3">
-                25 years of craft. House-baked buns. Charcoal-seared patties. Chennai's new burger destination.
-            </p>
-
-            <div class="hero-actions slide-in-4">
-                <a
-                    href={instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-primary hero-cta"
-                >
-                    <i class="fab fa-instagram" aria-hidden="true"></i>
-                    Follow {instagramHandle}
-                </a>
-                <a href="/menu" class="hero-link">
-                    Browse Menu
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
-
         </div>
 
-        <!-- 3D Featured Product -->
         <div class="hero-visual">
             <div class="circle-bg pulse-anim" aria-hidden="true"></div>
+            <div class="visual-stage">
+                <img
+                    src={`${base}/monster_stack.png`}
+                    alt="The Monster Stack - Burgerium's signature multi-patty burger"
+                    class="hero-burger float-anim tilt-element"
+                    loading="eager"
+                />
 
-            <!-- Hero burger image -->
-            <img
-                src={`${base}/monster_stack.png`}
-                alt="The Monster Stack - Burgerium's signature multi-patty burger"
-                class="hero-burger float-anim tilt-element"
-                loading="eager"
-            />
-
-            <div class="float-card glass-card" aria-hidden="true">
-                <span class="emoji">🔥</span>
-                <div class="card-text">
-                    <strong>The Real Deal</strong>
-                    <small>Only at Burgerium</small>
+                <div class="float-card glass-card" aria-hidden="true">
+                    <span class="emoji">🔥</span>
+                    <div class="card-text">
+                        <strong>The Real Deal</strong>
+                        <small>Only at Burgerium</small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,30 +92,40 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         display: flex;
         align-items: center;
         overflow: hidden;
+        isolation: isolate;
+        background:
+            radial-gradient(circle at 12% 18%, rgba(250, 162, 39, 0.18), transparent 24%),
+            radial-gradient(circle at 78% 30%, rgba(250, 162, 39, 0.1), transparent 28%),
+            linear-gradient(180deg, #fff6df 0%, #fff2d0 100%);
     }
 
-    /* Background handling */
     .bg-layer {
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        z-index: -1;
+        inset: 0;
+        z-index: 0;
         overflow: hidden;
+        pointer-events: none;
     }
 
     .parallax-img {
-        width: 100%; height: 100%;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        transform: scale(1.1);
-        filter: brightness(0.35);
+        object-position: center;
+        transform: scale(1.04);
+        opacity: 0.12;
+        filter: saturate(0.8) sepia(0.28) contrast(0.9);
         transition: transform 0.1s ease-out;
     }
 
     .overlay {
-        position: absolute; inset: 0;
-        background: linear-gradient(135deg, rgba(72, 33, 0, 0.82) 0%, rgba(122, 66, 0, 0.38) 100%);
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(90deg, rgba(255, 248, 230, 0.96) 0%, rgba(255, 244, 214, 0.92) 45%, rgba(255, 242, 205, 0.52) 72%, rgba(255, 241, 205, 0.22) 100%),
+            radial-gradient(circle at 80% 16%, rgba(74, 45, 7, 0.12), transparent 26%);
     }
 
-    /* Scroll Indicator */
     .scroll-indicator {
         position: absolute;
         bottom: 2rem;
@@ -122,12 +137,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         gap: 0.5rem;
         opacity: 0;
         animation: fadeInUp 1s ease forwards 1.5s;
+        z-index: 2;
     }
 
     .mouse {
         width: 24px;
         height: 40px;
-        border: 2px solid rgba(255, 255, 255, 0.5);
+        border: 2px solid rgba(71, 45, 6, 0.28);
         border-radius: 12px;
         position: relative;
     }
@@ -158,39 +174,86 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 2px;
-        color: rgba(255, 245, 219, 0.75);
+        color: var(--text-muted);
     }
 
     .hero-grid {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
         align-items: center;
         width: 100%;
-        padding-top: 80px; /* Header offset */
+        gap: clamp(2.5rem, 5vw, 6rem);
+        padding-top: calc(var(--header-height) + 2.2rem);
+        padding-bottom: 7rem;
+        position: relative;
+        z-index: 1;
     }
 
-    /* Text Animations */
+    .hero-copy-shell {
+        max-width: 42rem;
+        padding: clamp(1.8rem, 4vw, 2.8rem);
+        background: linear-gradient(145deg, rgba(255, 251, 241, 0.9), rgba(255, 242, 208, 0.78));
+        border: 1px solid rgba(96, 61, 10, 0.12);
+        border-radius: 34px;
+        box-shadow: 0 26px 60px rgba(105, 68, 9, 0.12);
+        backdrop-filter: blur(10px);
+    }
+
     .mega-title {
-        font-size: clamp(4rem, 8vw, 7rem);
-        line-height: 0.9;
-        margin-bottom: 2rem;
-        color: #fff;
+        font-size: clamp(4rem, 8vw, 6.8rem);
+        line-height: 0.88;
+        margin-bottom: 1.2rem;
+        color: var(--text-white);
+        letter-spacing: -0.03em;
     }
 
-    .mega-title .line { display: block; }
-    
-    .text-gradient {
-        background: linear-gradient(to right, #fff, var(--brand-orange));
-        -webkit-background-clip: text;
-        color: transparent;
+    .mega-title .line {
+        display: block;
+    }
+
+    .mega-title .accent {
+        color: var(--brand-orange-deep);
+        text-shadow: 0 10px 24px rgba(250, 162, 39, 0.18);
     }
 
     .hero-desc {
-        font-size: 1.25rem;
-        color: #fff0d1;
-        max-width: 500px;
-        margin-bottom: 3rem;
+        font-size: 1.18rem;
+        color: var(--text-gray);
+        max-width: 32rem;
+        margin-bottom: 1.5rem;
         line-height: 1.6;
+    }
+
+    .hero-highlights {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero-highlights span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        min-height: 42px;
+        padding: 0.65rem 0.95rem;
+        border-radius: 999px;
+        background: rgba(255, 250, 239, 0.92);
+        border: 1px solid var(--line-soft);
+        color: var(--text-white);
+        font-size: 0.92rem;
+        font-weight: 600;
+        box-shadow: 0 10px 24px rgba(96, 61, 10, 0.06);
+    }
+
+    .hero-highlights span::before {
+        content: '';
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--brand-orange);
+        box-shadow: 0 0 0 4px rgba(250, 162, 39, 0.16);
+        flex: 0 0 9px;
     }
 
     .hero-actions {
@@ -213,9 +276,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         gap: 0.6rem;
         min-height: 58px;
         padding: 1rem 1.6rem;
-        border: 1px solid rgba(255, 242, 219, 0.26);
-        background: rgba(255, 252, 244, 0.08);
-        color: #fff;
+        border: 1px solid var(--line-strong);
+        background: rgba(255, 252, 244, 0.78);
+        color: var(--text-white);
         font-family: var(--font-heading);
         font-size: 1.05rem;
         text-transform: uppercase;
@@ -226,7 +289,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .hero-link:hover {
         transform: translateY(-2px);
         border-color: var(--brand-orange);
-        background: rgba(250, 162, 39, 0.08);
+        background: rgba(250, 162, 39, 0.12);
     }
 
     .hero-link i {
@@ -241,9 +304,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        background: rgba(250, 162, 39, 0.2);
-        color: var(--brand-orange);
-        border: 1px solid rgba(255, 220, 155, 0.35);
+        background: rgba(250, 162, 39, 0.18);
+        color: var(--brand-orange-deep);
+        border: 1px solid rgba(184, 104, 0, 0.12);
         padding: 0.4rem 0.9rem;
         border-radius: 999px;
         font-weight: 700;
@@ -259,34 +322,48 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .slide-in-2 { animation: slideUp 0.8s ease forwards; opacity: 0; animation-delay: 0.4s; }
     .slide-in-3 { animation: slideUp 0.8s ease forwards; opacity: 0; animation-delay: 0.6s; }
     .slide-in-4 { animation: slideUp 0.8s ease forwards; opacity: 0; animation-delay: 0.8s; }
+    .slide-in-5 { animation: slideUp 0.8s ease forwards; opacity: 0; animation-delay: 1s; }
 
-    /* Visual Side */
     .hero-visual {
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 1;
     }
 
     .circle-bg {
         position: absolute;
-        width: 500px; height: 500px;
-        background: radial-gradient(circle, rgba(250,162,39,0.15) 0%, transparent 70%);
+        width: 540px;
+        height: 540px;
+        background: radial-gradient(circle, rgba(250, 162, 39, 0.2) 0%, rgba(250, 162, 39, 0.06) 42%, transparent 72%);
         border-radius: 50%;
         z-index: -1;
         animation: pulse-glow 4s infinite ease-in-out;
     }
 
+    .visual-stage {
+        position: relative;
+        padding: clamp(1rem, 2vw, 1.3rem);
+        border-radius: 36px;
+        background: linear-gradient(160deg, rgba(255, 252, 244, 0.7), rgba(255, 233, 183, 0.4));
+        border: 1px solid rgba(71, 45, 6, 0.12);
+        box-shadow: 0 30px 70px rgba(71, 45, 6, 0.14);
+        backdrop-filter: blur(10px);
+    }
+
     .hero-burger {
-        width: 120%; /* Large overflow */
-        max-width: 600px;
-        filter: drop-shadow(0 30px 50px rgba(0,0,0,0.6));
+        width: min(100%, 560px);
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
         transform-origin: center center;
     }
 
     .float-card {
         position: absolute;
-        bottom: 10%; right: 0;
+        right: -1rem;
+        bottom: 1.5rem;
         background: rgba(255, 247, 229, 0.9);
         border: 1px solid rgba(71, 45, 6, 0.14);
         backdrop-filter: blur(10px);
@@ -304,24 +381,25 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     @media (max-width: 900px) {
         .hero-wrapper {
+            height: auto;
             min-height: 100svh;
         }
 
         .hero-grid {
             grid-template-columns: 1fr;
-            text-align: center;
-            padding-top: 96px;
+            padding-top: calc(var(--header-height) + 1.2rem);
             height: auto;
-            min-height: 100svh;
+            min-height: auto;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding-bottom: 4rem;
-            gap: 1.5rem;
+            justify-content: flex-start;
+            padding-bottom: 3rem;
+            gap: 2rem;
         }
 
         .overlay {
-            background: linear-gradient(160deg, rgba(78, 38, 0, 0.76) 0%, rgba(136, 73, 0, 0.2) 100%);
+            background:
+                linear-gradient(180deg, rgba(255, 248, 230, 0.96) 0%, rgba(255, 244, 214, 0.92) 65%, rgba(255, 241, 205, 0.68) 100%);
         }
 
         .hero-text {
@@ -330,20 +408,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             align-items: center;
             z-index: 2;
             order: 1;
+            width: 100%;
+        }
+
+        .hero-copy-shell {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 26px;
         }
 
         .hero-desc {
             margin: 0 auto 1.25rem;
             font-size: 1.05rem;
-            padding: 0 1rem;
+            padding: 0;
             max-width: 95%;
             line-height: 1.7;
+        }
+
+        .hero-highlights {
+            justify-content: center;
         }
 
         .hero-actions {
             width: 100%;
             justify-content: center;
-            padding: 0 1rem;
+            padding: 0;
         }
 
         .hero-cta,
@@ -358,26 +448,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         }
 
         .hero-burger {
-            width: 72%;
-            max-width: 320px;
-            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 360px;
         }
 
         .mega-title {
-            font-size: clamp(3.8rem, 13.5vw, 4.8rem);
-            margin-bottom: 1.25rem;
+            font-size: clamp(3.6rem, 13vw, 4.8rem);
+            margin-bottom: 1rem;
             line-height: 1.05;
         }
 
-        .mega-title .text-gradient {
-            font-size: inherit;
-            line-height: inherit;
-            display: block;
-            margin-top: 0;
-        }
-
-        /* Re-enable animations but faster */
-        .slide-in-1, .slide-in-2, .slide-in-3, .slide-in-4 {
+        .slide-in-1, .slide-in-2, .slide-in-3, .slide-in-4, .slide-in-5 {
             opacity: 0;
             animation: slideUp 0.6s ease forwards;
         }
@@ -386,10 +467,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         .slide-in-2 { animation-delay: 0.2s; }
         .slide-in-3 { animation-delay: 0.3s; }
         .slide-in-4 { animation-delay: 0.4s; }
+        .slide-in-5 { animation-delay: 0.5s; }
 
         .float-card {
-            bottom: 5%;
-            right: 10%;
+            right: 0.5rem;
+            bottom: 0.8rem;
             padding: 0.5rem 0.75rem;
             font-size: 0.85rem;
         }
@@ -411,7 +493,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             font-size: 0.75rem;
             margin-bottom: 1rem;
         }
-
     }
 
     @media (max-width: 400px) {
@@ -420,8 +501,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         }
 
         .hero-burger {
-            width: 60%;
-            max-width: 220px;
+            max-width: 290px;
         }
     }
 </style>
