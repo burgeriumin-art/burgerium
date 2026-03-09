@@ -27,6 +27,21 @@ const timeline = [
         isNew: true
     }
 ];
+
+const houseNotes = [
+    {
+        title: 'Bread Comes First',
+        detail: 'The dough story started long before Burgerium. That changes how the bun feels, holds, and tastes.'
+    },
+    {
+        title: 'A New Chennai Chapter',
+        detail: 'Burgerium is not a copy of the older house. It is the Chennai expression of the same food knowledge.'
+    },
+    {
+        title: 'Built For Repeat Visits',
+        detail: 'Big stacks matter, but so do fries, sides, coffee, and the kind of menu people come back to work through.'
+    }
+];
 ---
 
 <section id="about" class="section-padding about-section" aria-labelledby="about-heading">
@@ -56,6 +71,15 @@ const timeline = [
                 <p class="story-text">
                     <strong>Burgerium</strong> comes from the same family behind <strong>Konari Breads</strong> and <strong>Burger Tree</strong>. The bakery started in 1998, Burger Tree followed in 2017, and Burgerium is the Chennai chapter: its own brand, its own mood, and a menu shaped by the same bakery-first foundation.
                 </p>
+
+                <div class="house-notes" aria-label="What defines Burgerium">
+                    {houseNotes.map((note) => (
+                        <article class="house-note">
+                            <strong>{note.title}</strong>
+                            <p>{note.detail}</p>
+                        </article>
+                    ))}
+                </div>
 
                 <div class="timeline-box" role="list" aria-label="Company timeline">
                     {timeline.map((item, index) => (
@@ -148,6 +172,38 @@ const timeline = [
 
     .story-text strong {
         color: var(--text-white);
+    }
+
+    .house-notes {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    .house-note {
+        padding: 1rem 1rem 1.1rem;
+        border-radius: 18px;
+        background: rgba(255, 250, 241, 0.88);
+        border: 1px solid var(--line-soft);
+        box-shadow: 0 12px 24px rgba(96, 61, 10, 0.05);
+    }
+
+    .house-note strong {
+        display: block;
+        margin-bottom: 0.45rem;
+        color: var(--text-white);
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    .house-note p {
+        margin: 0;
+        color: var(--text-gray);
+        font-size: 0.92rem;
+        line-height: 1.55;
     }
 
     /* Timeline Stylization */
@@ -289,6 +345,10 @@ const timeline = [
 
         .main-img {
             height: 100%;
+        }
+
+        .house-notes {
+            grid-template-columns: 1fr;
         }
 
         .timeline-box {

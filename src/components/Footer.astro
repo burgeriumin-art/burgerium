@@ -36,6 +36,9 @@ const socialLinks = [
                 <div class="f-col brand-col">
                     <img src={`${base}/logo.png`} alt="Burgerium" class="f-logo" loading="lazy" />
                     <p class="legal-line">A Unit of Urban Eats and Kitchen LLP</p>
+                    <p class="brand-note">
+                        Bakery roots, burger-house energy, and a menu that is built to be used before you even walk in.
+                    </p>
                     <a
                         href={instagramUrl}
                         target="_blank"
@@ -93,6 +96,7 @@ const socialLinks = [
 
             <div class="sub-footer">
                 <p>&copy; {currentYear} Burgerium. <strong>A Unit of Urban Eats and Kitchen LLP</strong>.</p>
+                <p class="sub-footer-note">Opening updates land on Instagram first. The full menu and prices are already online.</p>
             </div>
         </div>
     </div>
@@ -157,6 +161,12 @@ const socialLinks = [
         font-size: 0.75rem;
         letter-spacing: 0.5px;
         color: rgba(255, 245, 229, 0.72);
+        margin-bottom: 1.5rem;
+    }
+
+    .brand-note {
+        max-width: 24rem;
+        color: rgba(255, 245, 229, 0.82);
         margin-bottom: 1.5rem;
     }
 
@@ -320,6 +330,14 @@ const socialLinks = [
 
     .sub-footer strong {
         font-weight: 700;
+    }
+
+    .sub-footer-note {
+        margin-top: 0.5rem;
+        color: rgba(255, 245, 229, 0.58);
+        font-size: 0.74rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
     }
 
     @media (max-width: 768px) {

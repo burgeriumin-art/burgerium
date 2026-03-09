@@ -26,6 +26,21 @@ const locations = [
             </div>
         </div>
 
+        <div class="location-facts scroll-reveal delay-100" aria-label="Burgerium location facts">
+            <article>
+                <strong>First House</strong>
+                <span>Nungambakkam is where Burgerium opens its Chennai chapter.</span>
+            </article>
+            <article>
+                <strong>Menu Is Live</strong>
+                <span>Prices and sections are already online, so people can plan before they visit.</span>
+            </article>
+            <article>
+                <strong>Instagram First</strong>
+                <span>Opening dates, timings, and service updates will land there before anywhere else.</span>
+            </article>
+        </div>
+
         <div class="locations-grid" role="list">
             {locations.map((loc) => (
                 <article class={`location-card scroll-reveal ${loc.comingSoon ? 'coming-soon' : ''}`} role="listitem">
@@ -118,6 +133,38 @@ const locations = [
         gap: 1.5rem;
         max-width: 800px;
         margin: 0 auto;
+    }
+
+    .location-facts {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        max-width: 980px;
+        margin: 0 auto 1.5rem;
+    }
+
+    .location-facts article {
+        padding: 1.15rem 1.2rem;
+        border-radius: 20px;
+        background: rgba(255, 249, 236, 0.72);
+        border: 1px solid rgba(157, 93, 0, 0.12);
+        box-shadow: 0 12px 24px rgba(75, 47, 10, 0.05);
+    }
+
+    .location-facts strong {
+        display: block;
+        margin-bottom: 0.35rem;
+        color: var(--text-white);
+        font-family: var(--font-heading);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.95rem;
+    }
+
+    .location-facts span {
+        color: var(--text-gray);
+        line-height: 1.55;
+        font-size: 0.94rem;
     }
 
     .location-card {
@@ -282,6 +329,10 @@ const locations = [
     }
 
     @media (max-width: 768px) {
+        .location-facts {
+            grid-template-columns: 1fr;
+        }
+
         .locations-grid {
             grid-template-columns: 1fr;
         }

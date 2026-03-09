@@ -1,50 +1,58 @@
 ---
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const reviews = [
+    {
+        quote: 'The bun is what I remember first. Soft, light, and built for a proper burger.',
+        name: 'Arjun Nair',
+        tag: 'Bakery-first detail',
+        initial: 'A',
+        featured: true
+    },
+    {
+        quote: 'I would drive just for the loaded fries. If Chennai gets the same food, people are going to line up.',
+        name: 'Divya S.',
+        tag: 'Menu pull',
+        initial: 'D',
+        featured: false
+    },
+    {
+        quote: 'It tastes like people in the kitchen actually care about what goes out. That is rarer than it should be.',
+        name: 'Rahul Krishnan',
+        tag: 'House feel',
+        initial: 'R',
+        featured: false
+    }
+];
 ---
 
 <section class="reviews-section" style={`--reviews-bg: url('${base}/bg.png')`}>
     <div class="container">
-        <h2 class="section-title center">What <span class="text-orange">Regulars</span> Remember</h2>
+        <div class="reviews-head">
+            <p class="badge">Why People Remember It</p>
+            <h2 class="section-title center">What <span class="text-orange">Regulars</span> Remember</h2>
+            <p class="reviews-intro">
+                The strongest praise usually sounds simple: the bun is right, the fries are worth ordering, and the food feels looked after.
+            </p>
+        </div>
         
         <div class="reviews-grid">
-            <!-- Review 1 -->
-            <div class="review-card scroll-reveal">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"The bun is what I remember first. Soft, light, and built for a proper burger."</p>
-                <div class="reviewer">
-                    <div class="avatar">A</div>
-                    <div class="details">
-                        <strong>Arjun Nair</strong>
-                        <small>Heritage Regular</small>
+            {reviews.map((review, index) => (
+                <article class={`review-card scroll-reveal ${review.featured ? 'featured' : ''} ${index === 1 ? 'delay-100' : index === 2 ? 'delay-200' : ''}`}>
+                    <div class="review-top">
+                        <span class="review-tag">{review.tag}</span>
+                        <div class="stars" aria-hidden="true">★★★★★</div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Review 2 -->
-            <div class="review-card scroll-reveal delay-100">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"I would drive just for the loaded fries. If Chennai gets the same food, people are going to line up."</p>
-                <div class="reviewer">
-                    <div class="avatar">D</div>
-                    <div class="details">
-                        <strong>Divya S.</strong>
-                        <small>Food Blogger</small>
+                    <p class="review-text">"{review.quote}"</p>
+                    <div class="reviewer">
+                        <div class="avatar">{review.initial}</div>
+                        <div class="details">
+                            <strong>{review.name}</strong>
+                            <small>{review.featured ? 'Long-time family customer' : 'Heritage regular'}</small>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Review 3 -->
-            <div class="review-card scroll-reveal delay-200">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"It tastes like people in the kitchen actually care about what goes out. That is rarer than it should be."</p>
-                <div class="reviewer">
-                    <div class="avatar">R</div>
-                    <div class="details">
-                        <strong>Rahul Krishnan</strong>
-                        <small>RS Puram Fan</small>
-                    </div>
-                </div>
-            </div>
+                </article>
+            ))}
         </div>
     </div>
 </section>
@@ -72,13 +80,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .section-title {
         position: relative;
         z-index: 2;
-        margin-bottom: 4rem;
         text-align: center;
+    }
+
+    .reviews-head {
+        position: relative;
+        z-index: 2;
+        max-width: 44rem;
+        margin: 0 auto 3.5rem;
+        text-align: center;
+    }
+
+    .reviews-intro {
+        margin: 1rem auto 0;
+        max-width: 36rem;
+        color: rgba(43, 29, 13, 0.78);
+        line-height: 1.7;
+        font-size: 1.02rem;
     }
 
     .reviews-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 2rem;
         position: relative;
         z-index: 2;
@@ -88,23 +111,49 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         background: rgba(255, 250, 240, 0.78);
         backdrop-filter: blur(10px);
         padding: 2rem;
-        border-radius: 16px;
+        border-radius: 24px;
         border: 1px solid rgba(105, 65, 5, 0.12);
         box-shadow: var(--shadow-soft);
     }
 
-    .stars {
-        color: var(--brand-orange);
-        font-size: 1.2rem;
+    .review-card.featured {
+        background: linear-gradient(180deg, rgba(255, 248, 233, 0.94), rgba(255, 238, 201, 0.92));
+        border-color: rgba(184, 104, 0, 0.18);
+    }
+
+    .review-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
         margin-bottom: 1rem;
     }
 
+    .review-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(250, 162, 39, 0.12);
+        color: var(--brand-orange-deep);
+        font-size: 0.74rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .stars {
+        color: var(--brand-orange);
+        font-size: 1.05rem;
+    }
+
     .review-text {
-        color: var(--text-gray);
-        font-style: italic;
+        color: var(--text-white);
         margin-bottom: 1.5rem;
-        line-height: 1.6;
-        min-height: 80px;
+        line-height: 1.7;
+        min-height: 110px;
+        font-size: 1.02rem;
     }
 
     .reviewer {
@@ -125,4 +174,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     .details strong { display: block; color: var(--text-white); }
     .details small { color: var(--text-muted); }
+
+    @media (max-width: 1024px) {
+        .reviews-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .review-text {
+            min-height: 0;
+        }
+    }
 </style>
