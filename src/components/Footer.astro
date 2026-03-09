@@ -1,11 +1,13 @@
 ---
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentPath = Astro.url.pathname === '' ? '/' : Astro.url.pathname;
+const isHomePage = currentPath === '/';
 const currentYear = new Date().getFullYear();
 
 const quickLinks = [
-    { href: '#about', label: 'Our Roots' },
-    { href: '#menu', label: 'Menu Highlights' },
-    { href: '#locations', label: 'Locations' },
+    { href: isHomePage ? '#about' : '/#about', label: 'Our Roots' },
+    { href: isHomePage ? '#menu' : '/menu', label: 'Menu Highlights' },
+    { href: isHomePage ? '#locations' : '/#locations', label: 'Locations' },
 ];
 
 const socialLinks = [
@@ -19,7 +21,7 @@ const socialLinks = [
     <div class="footer-cta">
         <div class="container cta-content">
             <h3>Craving Excellence? Visit Us.</h3>
-            <a href="#locations" class="btn-primary">
+            <a href={isHomePage ? '#locations' : '/#locations'} class="btn-primary">
                 See Locations
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
             </a>

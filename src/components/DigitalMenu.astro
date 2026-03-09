@@ -1,0 +1,627 @@
+---
+import { menuItemCount, menuSectionCount, menuSections } from "../data/menu";
+
+const formatPrice = (price: number) => `Rs ${price}`;
+const getSectionCount = (section) =>
+  section.blocks.reduce((total, block) => total + block.items.length, 0);
+---
+
+<section class="digital-menu-hero">
+  <div class="container hero-shell">
+    <div class="hero-copy scroll-reveal">
+      <span class="hero-kicker">Burgerium Digital Menu</span>
+      <h1>Fresh burgers, bowls, coffee, shakes, and desserts. Fully online.</h1>
+      <p>
+        This menu is built from the latest Burgerium house menu so customers can actually browse on the website without pinching through a PDF.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn-primary" href="/#locations">Visit Burgerium</a>
+        <a class="hero-link" href="/#about">Read The Story</a>
+      </div>
+    </div>
+
+    <div class="hero-notes scroll-reveal">
+      <article class="hero-note">
+        <strong>{menuItemCount}</strong>
+        <span>menu items</span>
+      </article>
+      <article class="hero-note">
+        <strong>{menuSectionCount}</strong>
+        <span>menu sections</span>
+      </article>
+      <article class="hero-note">
+        <strong>20-25 min</strong>
+        <span>minimum prep time</span>
+      </article>
+      <article class="hero-note hero-note-wide">
+        <strong>Freshly made. Never frozen.</strong>
+        <span>All prices exclude GST. Orders are prepared fresh on request.</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="digital-menu-directory" aria-labelledby="digital-menu-heading">
+  <div class="container">
+    <div class="directory-top scroll-reveal">
+      <div>
+        <span class="directory-kicker">Full Menu</span>
+        <h2 id="digital-menu-heading">Browse by section or search the full menu.</h2>
+      </div>
+
+      <div class="search-panel">
+        <label class="search-label" for="menu-search">Search the menu</label>
+        <div class="search-field">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input
+            id="menu-search"
+            data-menu-search
+            type="search"
+            placeholder="Search burgers, wraps, shakes, coffee..."
+            autocomplete="off"
+          />
+          <button type="button" class="clear-search" data-clear-search hidden>
+            Clear
+          </button>
+        </div>
+        <p class="search-status" data-menu-status aria-live="polite">
+          {menuItemCount} items across {menuSectionCount} sections.
+        </p>
+      </div>
+    </div>
+
+    <div class="section-rail scroll-reveal" aria-label="Menu sections">
+      {menuSections.map((section) => (
+        <a class="section-chip" data-menu-chip href={`#${section.slug}`}>
+          {section.title}
+        </a>
+      ))}
+    </div>
+
+    <div class="catalog">
+      {menuSections.map((section, sectionIndex) => (
+        <section
+          id={section.slug}
+          class="catalog-section scroll-reveal"
+          data-menu-section
+          style={`--delay:${sectionIndex * 0.03}s`}
+        >
+          <div class="section-heading">
+            <div>
+              <span class="section-label">{section.label}</span>
+              <h3>{section.title}</h3>
+            </div>
+            <p class="section-total">{getSectionCount(section)} items</p>
+          </div>
+
+          <div class={`section-blocks ${section.blocks.length === 1 ? "single-block" : ""}`}>
+            {section.blocks.map((block) => (
+              <article class="menu-block" data-menu-block>
+                {(block.title || block.note) && (
+                  <header class="block-head">
+                    {block.title && <h4>{block.title}</h4>}
+                    {block.note && <p>{block.note}</p>}
+                  </header>
+                )}
+
+                <div class="item-list">
+                  {block.items.map((item) => {
+                    const searchValue = [
+                      section.title,
+                      section.label,
+                      block.title,
+                      block.note,
+                      item.name,
+                      item.description,
+                    ]
+                      .filter(Boolean)
+                      .join(" ")
+                      .toLowerCase();
+
+                    return (
+                      <article class="menu-item" data-menu-item data-search={searchValue}>
+                        <div class="item-copy">
+                          <div class="item-topline">
+                            <h5>{item.name}</h5>
+                            <span class="item-price">{formatPrice(item.price)}</span>
+                          </div>
+                          {item.description && <p>{item.description}</p>}
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ menuItemCount, menuSectionCount }}>
+  const searchInput = document.querySelector("[data-menu-search]");
+  const clearSearchButton = document.querySelector("[data-clear-search]");
+  const statusLabel = document.querySelector("[data-menu-status]");
+  const menuSections = Array.from(document.querySelectorAll("[data-menu-section]"));
+
+  const totalItems = menuItemCount;
+  const totalSections = menuSectionCount;
+
+  const updateMenuSearch = () => {
+    const query = searchInput instanceof HTMLInputElement
+      ? searchInput.value.trim().toLowerCase()
+      : "";
+
+    let visibleItems = 0;
+    let visibleSections = 0;
+
+    menuSections.forEach((section) => {
+      const blocks = Array.from(section.querySelectorAll("[data-menu-block]"));
+      let sectionHasMatch = false;
+
+      blocks.forEach((block) => {
+        const items = Array.from(block.querySelectorAll("[data-menu-item]"));
+        let blockHasMatch = false;
+
+        items.forEach((item) => {
+          const matches = !query || item.dataset.search?.includes(query);
+          item.hidden = !matches;
+
+          if (matches) {
+            visibleItems += 1;
+            blockHasMatch = true;
+            sectionHasMatch = true;
+          }
+        });
+
+        block.hidden = !blockHasMatch;
+      });
+
+      section.hidden = !sectionHasMatch;
+
+      if (sectionHasMatch) {
+        visibleSections += 1;
+      }
+    });
+
+    if (clearSearchButton instanceof HTMLButtonElement) {
+      clearSearchButton.hidden = !query;
+    }
+
+    if (statusLabel instanceof HTMLElement) {
+      if (query) {
+        const label = searchInput instanceof HTMLInputElement ? searchInput.value.trim() : "";
+        statusLabel.textContent = `${visibleItems} items match "${label}" across ${visibleSections} sections.`;
+      } else {
+        statusLabel.textContent = `${totalItems} items across ${totalSections} sections.`;
+      }
+    }
+  };
+
+  if (searchInput instanceof HTMLInputElement) {
+    searchInput.addEventListener("input", updateMenuSearch);
+  }
+
+  if (clearSearchButton instanceof HTMLButtonElement && searchInput instanceof HTMLInputElement) {
+    clearSearchButton.addEventListener("click", () => {
+      searchInput.value = "";
+      updateMenuSearch();
+      searchInput.focus();
+    });
+  }
+
+  updateMenuSearch();
+</script>
+
+<style>
+  .digital-menu-hero {
+    padding: calc(var(--header-height) + 4rem) 0 3rem;
+    background:
+      radial-gradient(circle at top right, rgba(250, 162, 39, 0.18), transparent 32%),
+      radial-gradient(circle at left center, rgba(250, 162, 39, 0.08), transparent 28%),
+      linear-gradient(180deg, #080808 0%, #050505 100%);
+  }
+
+  .hero-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 1.5rem;
+    align-items: end;
+  }
+
+  .hero-copy {
+    padding: 1.6rem 0;
+  }
+
+  .hero-kicker,
+  .directory-kicker,
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0.34rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(250, 162, 39, 0.14);
+    color: var(--brand-orange);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .hero-copy h1 {
+    margin: 1rem 0 1rem;
+    max-width: 11ch;
+    font-size: clamp(3rem, 7vw, 5.9rem);
+    line-height: 0.9;
+  }
+
+  .hero-copy p {
+    max-width: 56ch;
+    color: var(--text-gray);
+    font-size: 1.04rem;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.75rem;
+  }
+
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 58px;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.02rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .hero-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand-orange);
+    background: rgba(250, 162, 39, 0.08);
+  }
+
+  .hero-notes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .hero-note {
+    min-height: 132px;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+      linear-gradient(150deg, rgba(250, 162, 39, 0.12), transparent 55%);
+  }
+
+  .hero-note strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    line-height: 0.95;
+    color: #fff;
+  }
+
+  .hero-note span {
+    display: block;
+    color: var(--text-gray);
+    line-height: 1.5;
+  }
+
+  .hero-note-wide {
+    grid-column: span 2;
+    min-height: 0;
+  }
+
+  .digital-menu-directory {
+    padding: 1rem 0 6rem;
+    background:
+      linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+  }
+
+  .directory-top {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.8fr);
+    gap: 1.4rem;
+    align-items: end;
+    margin-bottom: 1.5rem;
+  }
+
+  .directory-top h2 {
+    margin-top: 1rem;
+    max-width: 15ch;
+    font-size: clamp(2.3rem, 5vw, 4rem);
+    line-height: 0.95;
+  }
+
+  .search-panel {
+    padding: 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 10, 10, 0.82);
+  }
+
+  .search-label {
+    display: block;
+    margin-bottom: 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-gray);
+  }
+
+  .search-field {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    align-items: center;
+    min-height: 60px;
+    padding: 0 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #111;
+  }
+
+  .search-field i {
+    color: var(--brand-orange);
+  }
+
+  .search-field input {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    min-height: 58px;
+  }
+
+  .search-field input::placeholder {
+    color: #8a8a8a;
+  }
+
+  .search-field input:focus {
+    outline: none;
+  }
+
+  .clear-search {
+    border: 0;
+    background: rgba(250, 162, 39, 0.16);
+    color: var(--brand-orange);
+    padding: 0.5rem 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .search-status {
+    margin-top: 0.65rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+  }
+
+  .section-rail {
+    position: sticky;
+    top: calc(var(--header-height) + 0.8rem);
+    z-index: 40;
+    display: flex;
+    gap: 0.7rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    padding: 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(9, 9, 9, 0.88);
+    backdrop-filter: blur(16px);
+  }
+
+  .section-chip {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  }
+
+  .section-chip:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand-orange);
+    background: rgba(250, 162, 39, 0.08);
+  }
+
+  .catalog {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .catalog-section {
+    padding: 1.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+      linear-gradient(160deg, rgba(250, 162, 39, 0.06), transparent 45%);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .catalog-section:hover {
+    border-color: rgba(250, 162, 39, 0.35);
+  }
+
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 1rem;
+  }
+
+  .section-heading h3 {
+    margin-top: 0.9rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 0.95;
+  }
+
+  .section-total {
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .section-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .section-blocks.single-block {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-block {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(7, 7, 7, 0.88);
+  }
+
+  .block-head {
+    margin-bottom: 1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .block-head h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .block-head p {
+    color: var(--text-gray);
+    line-height: 1.65;
+    font-size: 0.94rem;
+  }
+
+  .item-list {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .menu-item {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .menu-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .item-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 0.35rem;
+  }
+
+  .item-topline h5 {
+    font-family: var(--font-body);
+    font-size: 1.03rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.4;
+  }
+
+  .item-price {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0.2rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(250, 162, 39, 0.14);
+    color: var(--brand-orange);
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+
+  .item-copy p {
+    color: var(--text-gray);
+    line-height: 1.65;
+    font-size: 0.94rem;
+  }
+
+  @media (max-width: 980px) {
+    .hero-shell,
+    .directory-top {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-copy h1,
+    .directory-top h2 {
+      max-width: none;
+    }
+
+    .section-rail {
+      top: calc(var(--header-height) + 0.5rem);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .digital-menu-hero {
+      padding: calc(var(--header-height) + 2.5rem) 0 2rem;
+    }
+
+    .hero-notes {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-note-wide {
+      grid-column: auto;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .hero-actions :global(.btn-primary),
+    .hero-link {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .section-heading,
+    .item-topline {
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .catalog-section,
+    .menu-block,
+    .search-panel {
+      padding: 1rem;
+    }
+  }
+</style>

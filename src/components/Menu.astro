@@ -1,330 +1,373 @@
 ---
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+import { menuItemCount, menuSectionCount, menuSections } from "../data/menu";
 
-const menuItems = [
-    {
-        name: 'Lava Cheese',
-        price: '₹260',
-        description: 'The Icon. A molten camembert core encased in a crisp chicken fillet, locked between fresh-baked brioche. Highly addictive.',
-        image: 'peri_burger.png',
-        featured: true,
-        tag: 'Best Seller'
-    },
-    {
-        name: 'Cheesy Fries',
-        price: '₹140',
-        description: 'Liquid Gold. Golden shoestring fries drowned in our slow-cooked artisan cheese sauce. Crisp, creamy, repeat.',
-        image: 'feast.png',
-        featured: false,
-        tag: 'Sides'
-    },
-    {
-        name: 'Smoky BBQ Beef',
-        price: '₹240',
-        description: 'Flame-grilled beef, caramelized onions, and our thick house BBQ glaze. Built for smoke and sweetness.',
-        image: 'burger.png',
-        featured: false,
-        tag: 'Classic'
-    }
+const previewSectionSlugs = [
+  "signature-burgers",
+  "fries-starters",
+  "veg-burgers",
+  "milkshakes",
 ];
+
+const previewSections = previewSectionSlugs
+  .map((slug) => menuSections.find((section) => section.slug === slug))
+  .filter(Boolean);
+
+const getItems = (section) => section.blocks.flatMap((block) => block.items);
 ---
 
-<section id="menu" class="menu-section" aria-labelledby="menu-heading">
-    <div class="container">
-        <div class="header-center scroll-reveal">
-            <span class="sub-head">Taste The Hype</span>
-            <h2 class="title-head" id="menu-heading">Curated <span class="text-stroke">Classics</span></h2>
-        </div>
+<section id="menu" class="menu-preview" aria-labelledby="menu-preview-heading">
+  <div class="container menu-preview-shell">
+    <div class="menu-preview-copy scroll-reveal">
+      <span class="menu-kicker">Digital Menu</span>
+      <h2 id="menu-preview-heading">
+        The full Burgerium menu is now built for the web.
+      </h2>
+      <p class="menu-copy">
+        Browse burgers, wraps, bowls, fries, shakes, coffee, and desserts in a proper digital menu instead of a PDF-only layout.
+      </p>
 
-        <div class="spotlight-grid" role="list">
-            {menuItems.map((item, index) => (
-                <article
-                    class={`spotlight-card scroll-reveal ${item.featured ? 'featured' : ''}`}
-                    role="listitem"
-                    style={`--delay: ${index * 0.1}s`}
-                >
-                    {item.featured && <div class="card-bg" aria-hidden="true"></div>}
-                    {item.tag && <span class="item-tag">{item.tag}</span>}
-                    <div class="card-content">
-                        <div class="card-header">
-                            <h3>{item.name}</h3>
-                            <span class="price">{item.price}</span>
-                        </div>
-                        <p>{item.description}</p>
-                        {item.featured && (
-                            <a class="order-btn" href="#locations">
-                                See Locations
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        )}
-                    </div>
-                    <img
-                        src={`${base}/${item.image}`}
-                        alt={`${item.name} - ${item.description.split('.')[0]}`}
-                        class={`product-img ${item.featured ? 'float-slow' : 'scale-hover'}`}
-                        loading="lazy"
-                    />
-                </article>
-            ))}
-        </div>
+      <div class="menu-stats" aria-label="Menu highlights">
+        <article class="stat-card">
+          <strong>{menuItemCount}</strong>
+          <span>Menu items</span>
+        </article>
+        <article class="stat-card">
+          <strong>{menuSectionCount}</strong>
+          <span>Sections</span>
+        </article>
+        <article class="stat-card">
+          <strong>20-25</strong>
+          <span>Minutes fresh prep</span>
+        </article>
+      </div>
+
+      <div class="menu-actions">
+        <a class="btn-primary" href="/menu">Browse Full Menu</a>
+        <a class="btn-secondary" href="#locations">See Location</a>
+      </div>
+
+      <p class="menu-meta">
+        Freshly prepared on request. All prices exclude GST.
+      </p>
     </div>
+
+    <div class="preview-grid">
+      {previewSections.map((section, index) => {
+        const items = getItems(section);
+        const minPrice = Math.min(...items.map((item) => item.price));
+        const samples = items.slice(0, 3);
+
+        return (
+          <a
+            href={`/menu#${section.slug}`}
+            class="preview-card scroll-reveal"
+            style={`--delay:${index * 0.08}s`}
+          >
+            <div class="preview-card-top">
+              <span class="preview-label">{section.label}</span>
+              <span class="preview-price">From Rs {minPrice}</span>
+            </div>
+
+            <h3>{section.title}</h3>
+
+            <p class="preview-count">
+              {items.length} items live on the digital menu
+            </p>
+
+            <ul class="preview-list">
+              {samples.map((item) => (
+                <li>{item.name}</li>
+              ))}
+            </ul>
+
+            <span class="preview-link">
+              Open section
+              <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
 </section>
 
 <style>
-    .menu-section {
-        background: #080808;
-        padding: 8rem 0;
-        overflow: hidden;
+  .menu-preview {
+    position: relative;
+    padding: 7rem 0;
+    background:
+      radial-gradient(circle at top left, rgba(250, 162, 39, 0.16), transparent 32%),
+      linear-gradient(180deg, #090909 0%, #050505 100%);
+    overflow: hidden;
+  }
+
+  .menu-preview::before {
+    content: "";
+    position: absolute;
+    inset: 2rem auto auto 50%;
+    width: min(620px, 72vw);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(250, 162, 39, 0.55), transparent);
+    transform: translateX(-50%);
+  }
+
+  .menu-preview-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .menu-preview-copy {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    padding: 2rem 2.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(12, 12, 12, 0.9);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+  }
+
+  .menu-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    margin-bottom: 1.25rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #111;
+    background: var(--brand-orange);
+  }
+
+  .menu-preview-copy h2 {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 0.92;
+    max-width: 12ch;
+  }
+
+  .menu-copy,
+  .menu-meta {
+    max-width: 58ch;
+    color: var(--text-gray);
+    line-height: 1.7;
+  }
+
+  .menu-copy {
+    margin-top: 1.35rem;
+    font-size: 1.02rem;
+  }
+
+  .menu-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin: 2rem 0 1.5rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  }
+
+  .stat-card strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--brand-orange);
+  }
+
+  .stat-card span {
+    display: block;
+    color: var(--text-gray);
+    font-size: 0.86rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .menu-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 58px;
+    padding: 1rem 1.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand-orange);
+    background: rgba(250, 162, 39, 0.08);
+  }
+
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .preview-card {
+    min-height: 280px;
+    padding: 1.4rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+      linear-gradient(160deg, rgba(250, 162, 39, 0.08), transparent 48%);
+    transition:
+      transform 0.32s ease,
+      border-color 0.32s ease,
+      box-shadow 0.32s ease;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .preview-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(250, 162, 39, 0.65);
+    box-shadow: 0 26px 40px rgba(0, 0, 0, 0.28);
+  }
+
+  .preview-card-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .preview-label,
+  .preview-price {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .preview-label {
+    color: #111;
+    background: var(--brand-orange);
+  }
+
+  .preview-price {
+    color: #f5d29c;
+    background: rgba(250, 162, 39, 0.12);
+  }
+
+  .preview-card h3 {
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    line-height: 1;
+    margin-bottom: 0.7rem;
+  }
+
+  .preview-count {
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .preview-list {
+    list-style: none;
+    display: grid;
+    gap: 0.55rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .preview-list li {
+    position: relative;
+    padding-left: 1rem;
+    color: #fff;
+  }
+
+  .preview-list li::before {
+    content: "";
+    position: absolute;
+    top: 0.55rem;
+    left: 0;
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 50%;
+    background: var(--brand-orange);
+  }
+
+  .preview-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--brand-orange);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+  }
+
+  .preview-link i {
+    transition: transform 0.25s ease;
+  }
+
+  .preview-card:hover .preview-link i {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1150px) {
+    .menu-preview-shell {
+      grid-template-columns: 1fr;
     }
 
-    .header-center {
-        text-align: center;
-        margin-bottom: 5rem;
+    .menu-preview-copy {
+      position: relative;
+      top: auto;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .menu-preview {
+      padding: 5rem 0;
     }
 
-    .sub-head {
-        color: var(--brand-orange);
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-size: 0.9rem;
-        display: block;
-        margin-bottom: 1rem;
-        font-weight: 600;
+    .menu-preview-copy {
+      padding: 1.4rem;
     }
 
-    .title-head {
-        font-size: clamp(2.5rem, 5vw, 3.5rem);
-        color: #fff;
+    .menu-preview-copy h2 {
+      max-width: none;
+      font-size: clamp(2.2rem, 12vw, 3.2rem);
     }
 
-    .text-stroke {
-        -webkit-text-stroke: 1px #fff;
-        color: transparent;
+    .menu-stats,
+    .preview-grid {
+      grid-template-columns: 1fr;
     }
 
-    /* Grid Layout */
-    .spotlight-grid {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr 1fr;
-        grid-template-rows: 420px;
-        gap: 1.5rem;
+    .menu-actions {
+      flex-direction: column;
     }
 
-    /* Card Styling */
-    .spotlight-card {
-        position: relative;
-        background: #111;
-        border-radius: 20px;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.05);
-        transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-        transition-delay: var(--delay, 0s);
+    .btn-secondary,
+    .menu-actions :global(.btn-primary) {
+      width: 100%;
+      justify-content: center;
     }
-
-    .spotlight-card:hover {
-        border-color: var(--brand-orange);
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .spotlight-card:focus-within {
-        border-color: var(--brand-orange);
-        box-shadow: var(--focus-ring);
-    }
-
-    .spotlight-card.featured {
-        background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-    }
-
-    /* Item tag */
-    .item-tag {
-        position: absolute;
-        top: 1.5rem;
-        left: 1.5rem;
-        background: var(--brand-orange);
-        color: #000;
-        padding: 0.35rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        z-index: 3;
-    }
-
-    .card-bg {
-        position: absolute;
-        top: 0; right: 0;
-        width: 300px; height: 300px;
-        background: radial-gradient(circle, rgba(250,162,39,0.15) 0%, transparent 70%);
-        border-radius: 50%;
-        transform: translate(30%, -30%);
-        pointer-events: none;
-    }
-
-    .card-content {
-        position: relative;
-        z-index: 2;
-    }
-
-    .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 1rem;
-        margin-top: 1.5rem;
-    }
-
-    .card-header h3 {
-        font-size: clamp(1.4rem, 2vw, 1.8rem);
-        max-width: 150px;
-        line-height: 1.1;
-    }
-
-    .price {
-        font-family: var(--font-body);
-        font-weight: 700;
-        color: var(--brand-orange);
-        font-size: 1.2rem;
-        background: rgba(250, 162, 39, 0.1);
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-    }
-
-    .spotlight-card p {
-        color: var(--text-gray);
-        font-size: 0.95rem;
-        line-height: 1.6;
-        max-width: 65%;
-    }
-
-    .order-btn {
-        background: #fff;
-        color: #000;
-        border: none;
-        padding: 0.9rem 1.8rem;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 0.9rem;
-        cursor: pointer;
-        margin-top: 1.5rem;
-        width: fit-content;
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .order-btn:hover {
-        background: var(--brand-orange);
-        box-shadow: 0 0 20px rgba(250,162,39,0.5);
-        transform: scale(1.05);
-    }
-
-    .order-btn:focus-visible {
-        box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--brand-orange);
-    }
-
-    .order-btn i {
-        transition: transform 0.3s ease;
-    }
-
-    .order-btn:hover i {
-        transform: translateX(4px);
-    }
-
-    /* Image Handling */
-    .product-img {
-        position: absolute;
-        bottom: -20px;
-        right: -20px;
-        width: 260px;
-        transition: transform 0.5s ease;
-        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
-        pointer-events: none;
-    }
-
-    .spotlight-card.featured .product-img {
-        width: 350px;
-        right: -40px;
-        bottom: -40px;
-    }
-
-    .spotlight-card:hover .product-img {
-        transform: scale(1.08) rotate(-3deg);
-    }
-
-    .float-slow {
-        animation: float 6s ease-in-out infinite;
-    }
-
-    @media (max-width: 1200px) {
-        .spotlight-grid {
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto;
-        }
-
-        .spotlight-card.featured {
-            grid-column: span 2;
-        }
-
-        .spotlight-card.featured .product-img {
-            width: 300px;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .menu-section {
-            padding: 5rem 0;
-        }
-
-        .header-center {
-            margin-bottom: 3rem;
-        }
-
-        .spotlight-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .spotlight-card {
-            min-height: auto;
-            padding: 1.5rem;
-            padding-bottom: 10rem;
-        }
-
-        .spotlight-card.featured {
-            grid-column: span 1;
-            padding-bottom: 12rem;
-        }
-
-        .spotlight-card p {
-            max-width: 70%;
-        }
-
-        .product-img {
-            width: 180px;
-            bottom: -15px;
-            right: -10px;
-        }
-
-        .spotlight-card.featured .product-img {
-            width: 240px;
-            right: -20px;
-            bottom: -20px;
-        }
-
-        .item-tag {
-            top: 1rem;
-            left: 1rem;
-        }
-
-        .card-header {
-            margin-top: 2rem;
-        }
-    }
+  }
 </style>
