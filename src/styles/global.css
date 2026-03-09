@@ -1,14 +1,21 @@
 :root {
-    --bg-dark: #050505;
-    --bg-card: #101010;
+    --bg-dark: #fff6de;
+    --bg-card: #fff8ed;
+    --bg-surface: #fff0c9;
+    --bg-surface-strong: #ffd978;
+    --bg-panel: rgba(255, 249, 237, 0.94);
     --brand-orange: #FAA227;
     --brand-orange-light: #FFB84D;
+    --brand-orange-deep: #b86800;
     --header-height: 120px;
     /* Increased for premium brand visibility */
-    --brand-glow: rgba(250, 162, 39, 0.4);
-    --text-white: #ffffff;
-    --text-gray: #b8b8b8; /* Improved contrast from #b0b0b0 */
-    --text-muted: #9a9a9a; /* For less important text, still accessible */
+    --brand-glow: rgba(250, 162, 39, 0.28);
+    --text-white: #1f1609;
+    --text-gray: #5f5039;
+    --text-muted: #84755d;
+    --line-soft: rgba(71, 45, 6, 0.12);
+    --line-strong: rgba(71, 45, 6, 0.22);
+    --shadow-soft: 0 18px 40px rgba(106, 66, 7, 0.12);
 
     --font-heading: 'Anton', sans-serif;
     --font-body: 'Outfit', sans-serif;
@@ -44,7 +51,9 @@
 html,
 body {
     width: 100%;
-    background-color: var(--bg-dark);
+    background:
+        radial-gradient(circle at top left, rgba(250, 162, 39, 0.14), transparent 24%),
+        linear-gradient(180deg, #fff8e9 0%, var(--bg-dark) 100%);
     color: var(--text-white);
     font-family: var(--font-body);
     overflow-x: hidden;
@@ -124,7 +133,7 @@ textarea:focus-visible {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-dark);
+    background: rgba(168, 110, 14, 0.08);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -278,7 +287,7 @@ textarea:focus-visible {
     font-family: var(--font-heading);
     font-size: 1.1rem;
     letter-spacing: 1px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(39, 24, 3, 0.16);
     cursor: pointer;
     transition: 0.3s ease;
     text-transform: uppercase;
@@ -290,7 +299,7 @@ textarea:focus-visible {
 
 .btn-secondary:hover {
     border-color: var(--brand-orange);
-    color: var(--brand-orange);
+    color: var(--brand-orange-deep);
     background: rgba(250, 162, 39, 0.1);
 }
 
@@ -339,9 +348,9 @@ html.reveal-enabled .scroll-reveal.active {
 
 /* Glass morphism utility */
 .glass {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 250, 242, 0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--line-soft);
 }
 
 /* Screen reader only utility */

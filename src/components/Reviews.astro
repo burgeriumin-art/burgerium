@@ -66,7 +66,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(0,0,0,0.85); /* Dark overlay */
+        background: linear-gradient(180deg, rgba(255, 246, 223, 0.92), rgba(250, 186, 73, 0.72));
     }
 
     .section-title {
@@ -85,11 +85,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     }
 
     .review-card {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 250, 240, 0.78);
         backdrop-filter: blur(10px);
         padding: 2rem;
         border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(105, 65, 5, 0.12);
+        box-shadow: var(--shadow-soft);
     }
 
     .stars {
@@ -99,7 +100,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     }
 
     .review-text {
-        color: #ddd;
+        color: var(--text-gray);
         font-style: italic;
         margin-bottom: 1.5rem;
         line-height: 1.6;
@@ -122,6 +123,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         font-weight: 700;
     }
 
-    .details strong { display: block; color: #fff; }
-    .details small { color: #888; }
+    .details strong { display: block; color: var(--text-white); }
+    .details small { color: var(--text-muted); }
 </style>

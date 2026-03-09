@@ -222,7 +222,7 @@ const getSectionCount = (section) =>
     background:
       radial-gradient(circle at top right, rgba(250, 162, 39, 0.18), transparent 32%),
       radial-gradient(circle at left center, rgba(250, 162, 39, 0.08), transparent 28%),
-      linear-gradient(180deg, #080808 0%, #050505 100%);
+      linear-gradient(180deg, #fff8e8 0%, #ffe09d 100%);
   }
 
   .hero-shell {
@@ -279,8 +279,8 @@ const getSectionCount = (section) =>
     justify-content: center;
     min-height: 58px;
     padding: 1rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #fff;
+    border: 1px solid var(--line-strong);
+    color: var(--text-white);
     font-family: var(--font-heading);
     font-size: 1.02rem;
     text-transform: uppercase;
@@ -303,10 +303,10 @@ const getSectionCount = (section) =>
   .hero-note {
     min-height: 132px;
     padding: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line-soft);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-      linear-gradient(150deg, rgba(250, 162, 39, 0.12), transparent 55%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.36)),
+      linear-gradient(150deg, rgba(250, 162, 39, 0.16), transparent 55%);
   }
 
   .hero-note strong {
@@ -315,7 +315,7 @@ const getSectionCount = (section) =>
     font-family: var(--font-heading);
     font-size: clamp(2rem, 3vw, 2.8rem);
     line-height: 0.95;
-    color: #fff;
+    color: var(--text-white);
   }
 
   .hero-note span {
@@ -332,7 +332,7 @@ const getSectionCount = (section) =>
   .digital-menu-directory {
     padding: 1rem 0 6rem;
     background:
-      linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+      linear-gradient(180deg, #fff6de 0%, #fff0c9 100%);
   }
 
   .directory-top {
@@ -352,8 +352,8 @@ const getSectionCount = (section) =>
 
   .search-panel {
     padding: 1.1rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(10, 10, 10, 0.82);
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 249, 237, 0.88);
   }
 
   .search-label {
@@ -373,8 +373,8 @@ const getSectionCount = (section) =>
     align-items: center;
     min-height: 60px;
     padding: 0 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: #111;
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .search-field i {
@@ -385,13 +385,13 @@ const getSectionCount = (section) =>
     width: 100%;
     border: 0;
     background: transparent;
-    color: #fff;
+    color: var(--text-white);
     font: inherit;
     min-height: 58px;
   }
 
   .search-field input::placeholder {
-    color: #8a8a8a;
+    color: var(--text-muted);
   }
 
   .search-field input:focus {
@@ -401,7 +401,7 @@ const getSectionCount = (section) =>
   .clear-search {
     border: 0;
     background: rgba(250, 162, 39, 0.16);
-    color: var(--brand-orange);
+    color: var(--brand-orange-deep);
     padding: 0.5rem 0.8rem;
     font-weight: 700;
     cursor: pointer;
@@ -422,8 +422,8 @@ const getSectionCount = (section) =>
     overflow-x: auto;
     margin-bottom: 1.5rem;
     padding: 0.7rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(9, 9, 9, 0.88);
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 248, 232, 0.86);
     backdrop-filter: blur(16px);
   }
 
@@ -433,8 +433,8 @@ const getSectionCount = (section) =>
     align-items: center;
     min-height: 42px;
     padding: 0.5rem 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
+    border: 1px solid var(--line-soft);
+    color: var(--text-white);
     font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -455,10 +455,10 @@ const getSectionCount = (section) =>
 
   .catalog-section {
     padding: 1.3rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line-soft);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
-      linear-gradient(160deg, rgba(250, 162, 39, 0.06), transparent 45%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34)),
+      linear-gradient(160deg, rgba(250, 162, 39, 0.12), transparent 45%);
     transition: border-color 0.3s ease, transform 0.3s ease;
     transition-delay: var(--delay, 0s);
   }
@@ -501,14 +501,14 @@ const getSectionCount = (section) =>
 
   .menu-block {
     padding: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(7, 7, 7, 0.88);
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 250, 240, 0.86);
   }
 
   .block-head {
     margin-bottom: 1rem;
     padding-bottom: 0.9rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--line-soft);
   }
 
   .block-head h4 {
@@ -529,7 +529,7 @@ const getSectionCount = (section) =>
 
   .menu-item {
     padding-bottom: 0.85rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(71, 45, 6, 0.08);
   }
 
   .menu-item:last-child {
@@ -562,7 +562,7 @@ const getSectionCount = (section) =>
     padding: 0.2rem 0.75rem;
     border-radius: 999px;
     background: rgba(250, 162, 39, 0.14);
-    color: var(--brand-orange);
+    color: var(--brand-orange-deep);
     font-weight: 700;
     font-size: 0.82rem;
   }

@@ -53,7 +53,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <style>
     .anatomy-section {
-        background: radial-gradient(circle at center, #1a1a1a 0%, #050505 70%);
+        background: radial-gradient(circle at center, #fff8ea 0%, #ffe1a4 72%);
         padding: 8rem 0;
         overflow: hidden;
     }
@@ -73,11 +73,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .title {
         font-size: 3.5rem;
         margin: 1rem 0;
-        color: #fff;
+        color: var(--text-white);
     }
 
     .subtitle {
-        color: #888;
+        color: var(--text-muted);
         font-size: 1.2rem;
         max-width: 600px;
         margin: 0 auto;
@@ -99,16 +99,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .label-item {
         margin-bottom: 4rem;
         position: relative;
+        padding: 1.1rem 1.25rem;
+        border: 1px solid var(--line-soft);
+        background: rgba(255, 249, 237, 0.7);
+        box-shadow: var(--shadow-soft);
     }
 
     .label-item h3 {
-        color: #fff;
+        color: var(--text-white);
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
     }
 
     .label-item p {
-        color: #aaa;
+        color: var(--text-gray);
         font-size: 0.95rem;
     }
 

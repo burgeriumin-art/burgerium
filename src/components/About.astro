@@ -86,7 +86,7 @@ const timeline = [
 
 <style>
     .about-section {
-        background: var(--bg-dark);
+        background: linear-gradient(180deg, #fff8ea 0%, var(--bg-surface) 100%);
     }
 
     .grid-layout {
@@ -100,6 +100,7 @@ const timeline = [
         position: relative;
         border-radius: 12px;
         overflow: hidden;
+        box-shadow: var(--shadow-soft);
     }
 
     .main-img {
@@ -151,14 +152,14 @@ const timeline = [
 
     /* Timeline Stylization */
     .timeline-box {
-        background: #111;
+        background: rgba(255, 250, 241, 0.9);
         padding: 1.5rem 2rem;
         border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 0;
-        border: 1px solid rgba(255,255,255,0.08);
+        border: 1px solid var(--line-soft);
         flex-wrap: wrap;
     }
 
@@ -179,7 +180,7 @@ const timeline = [
         align-items: center;
         justify-content: center;
         border-radius: 12px;
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(250, 162, 39, 0.12);
         transition: transform 0.3s ease;
     }
 
@@ -241,7 +242,7 @@ const timeline = [
     .story-footer {
         margin-top: 2rem;
         font-style: italic;
-        color: var(--brand-orange);
+        color: var(--brand-orange-deep);
         font-size: 0.95rem;
     }
 

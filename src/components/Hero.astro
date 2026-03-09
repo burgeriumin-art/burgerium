@@ -1,4 +1,5 @@
 ---
+import { instagramHandle, instagramUrl } from '../data/social';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -28,6 +29,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             <p class="hero-desc slide-in-3">
                 25 years of craft. House-baked buns. Charcoal-seared patties. Chennai's new burger destination.
             </p>
+
+            <div class="hero-actions slide-in-4">
+                <a
+                    href={instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-primary hero-cta"
+                >
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                    Follow {instagramHandle}
+                </a>
+                <a href="/menu" class="hero-link">
+                    Browse Menu
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
 
         </div>
 
@@ -90,7 +107,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     .overlay {
         position: absolute; inset: 0;
-        background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 100%);
+        background: linear-gradient(135deg, rgba(72, 33, 0, 0.82) 0%, rgba(122, 66, 0, 0.38) 100%);
     }
 
     /* Scroll Indicator */
@@ -141,7 +158,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 2px;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 245, 219, 0.75);
     }
 
     .hero-grid {
@@ -170,19 +187,63 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     .hero-desc {
         font-size: 1.25rem;
-        color: #ccc;
+        color: #fff0d1;
         max-width: 500px;
         margin-bottom: 3rem;
         line-height: 1.6;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .hero-cta {
+        min-height: 58px;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .hero-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        min-height: 58px;
+        padding: 1rem 1.6rem;
+        border: 1px solid rgba(255, 242, 219, 0.26);
+        background: rgba(255, 252, 244, 0.08);
+        color: #fff;
+        font-family: var(--font-heading);
+        font-size: 1.05rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .hero-link:hover {
+        transform: translateY(-2px);
+        border-color: var(--brand-orange);
+        background: rgba(250, 162, 39, 0.08);
+    }
+
+    .hero-link i {
+        transition: transform 0.25s ease;
+    }
+
+    .hero-link:hover i {
+        transform: translateX(4px);
     }
 
     .launch-badge {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        background: rgba(250, 162, 39, 0.15);
+        background: rgba(250, 162, 39, 0.2);
         color: var(--brand-orange);
-        border: 1px solid rgba(250, 162, 39, 0.4);
+        border: 1px solid rgba(255, 220, 155, 0.35);
         padding: 0.4rem 0.9rem;
         border-radius: 999px;
         font-weight: 700;
@@ -226,8 +287,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .float-card {
         position: absolute;
         bottom: 10%; right: 0;
-        background: rgba(20,20,20,0.8);
-        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255, 247, 229, 0.9);
+        border: 1px solid rgba(71, 45, 6, 0.14);
         backdrop-filter: blur(10px);
         padding: 1rem 1.5rem;
         border-radius: 16px;
@@ -238,8 +299,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     }
 
     .float-card .emoji { font-size: 2rem; }
-    .float-card strong { display: block; color: var(--brand-orange); font-size: 1.1rem; }
-    .float-card small { color: #888; text-transform: uppercase; font-size: 0.7rem; }
+    .float-card strong { display: block; color: var(--brand-orange-deep); font-size: 1.1rem; }
+    .float-card small { color: var(--text-muted); text-transform: uppercase; font-size: 0.7rem; }
 
     @media (max-width: 900px) {
         .hero-wrapper {
@@ -260,7 +321,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         }
 
         .overlay {
-            background: linear-gradient(160deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 100%);
+            background: linear-gradient(160deg, rgba(78, 38, 0, 0.76) 0%, rgba(136, 73, 0, 0.2) 100%);
         }
 
         .hero-text {
@@ -277,6 +338,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             padding: 0 1rem;
             max-width: 95%;
             line-height: 1.7;
+        }
+
+        .hero-actions {
+            width: 100%;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+
+        .hero-cta,
+        .hero-link {
+            width: min(100%, 320px);
         }
 
         .hero-visual {

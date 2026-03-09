@@ -1,4 +1,5 @@
 ---
+import { instagramHandle, instagramUrl } from '../data/social';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const currentPath = Astro.url.pathname === '' ? '/' : Astro.url.pathname;
 const isHomePage = currentPath === '/';
@@ -11,8 +12,7 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-    { href: 'https://www.instagram.com/burgerium.in/', icon: 'fa-instagram', label: 'Follow us on Instagram' },
-    { href: 'https://facebook.com', icon: 'fa-facebook-f', label: 'Follow us on Facebook' },
+    { href: instagramUrl, icon: 'fa-instagram', label: 'Follow us on Instagram' },
 ];
 ---
 
@@ -36,6 +36,22 @@ const socialLinks = [
                 <div class="f-col brand-col">
                     <img src={`${base}/logo.png`} alt="Burgerium" class="f-logo" loading="lazy" />
                     <p class="legal-line">A Unit of Urban Eats and Kitchen LLP</p>
+                    <a
+                        href={instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="instagram-card"
+                        aria-label={`Open Burgerium Instagram ${instagramHandle}`}
+                    >
+                        <span class="instagram-icon" aria-hidden="true">
+                            <i class="fab fa-instagram"></i>
+                        </span>
+                        <span class="instagram-copy">
+                            <strong>Instagram</strong>
+                            <small>{instagramHandle}</small>
+                        </span>
+                        <i class="fas fa-arrow-up-right-from-square instagram-external" aria-hidden="true"></i>
+                    </a>
                     <div class="socials" role="list" aria-label="Social media links">
                         {socialLinks.map((social) => (
                             <a
@@ -85,9 +101,9 @@ const socialLinks = [
 <style>
     /* CTA Bar */
     .footer-cta {
-        background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+        background: linear-gradient(135deg, #ffe4a8 0%, #ffc457 100%);
         padding: 4rem 0;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
     .cta-content {
@@ -98,7 +114,7 @@ const socialLinks = [
     }
 
     .cta-content h3 {
-        color: #fff;
+        color: var(--text-white);
         font-size: clamp(1.5rem, 3vw, 2rem);
     }
 
@@ -108,7 +124,7 @@ const socialLinks = [
 
     /* Main Footer */
     .main-footer {
-        background: var(--brand-orange);
+        background: linear-gradient(180deg, #ffc65f 0%, #f6a92f 100%);
         color: #000;
         padding-top: 4rem;
     }
@@ -141,6 +157,65 @@ const socialLinks = [
         margin-bottom: 1.5rem;
     }
 
+    .instagram-card {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 0.9rem;
+        max-width: 320px;
+        padding: 0.9rem 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(0,0,0,0.14);
+        background: rgba(255,248,233,0.62);
+        color: #000;
+        transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .instagram-card:hover {
+        transform: translateY(-2px);
+        background: rgba(255,248,233,0.84);
+        border-color: rgba(0,0,0,0.26);
+    }
+
+    .instagram-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #000;
+        color: var(--brand-orange);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+    }
+
+    .instagram-copy {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .instagram-copy strong {
+        font-family: var(--font-heading);
+        font-size: 1.05rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .instagram-copy small {
+        margin-top: 0.3rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        opacity: 0.78;
+    }
+
+    .instagram-external {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
     .socials {
         display: flex;
         gap: 0.75rem;
@@ -150,7 +225,7 @@ const socialLinks = [
         width: 40px;
         height: 40px;
         background: #000;
-        color: var(--brand-orange);
+        color: #fff2d5;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -266,6 +341,10 @@ const socialLinks = [
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .instagram-card {
+            width: 100%;
         }
 
         .socials {

@@ -97,7 +97,7 @@ const getItems = (section) => section.blocks.flatMap((block) => block.items);
     padding: 7rem 0;
     background:
       radial-gradient(circle at top left, rgba(250, 162, 39, 0.16), transparent 32%),
-      linear-gradient(180deg, #090909 0%, #050505 100%);
+      linear-gradient(180deg, #fff8e8 0%, #ffe4a7 100%);
     overflow: hidden;
   }
 
@@ -122,9 +122,9 @@ const getItems = (section) => section.blocks.flatMap((block) => block.items);
     position: sticky;
     top: calc(var(--header-height) + 2rem);
     padding: 2rem 2.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(12, 12, 12, 0.9);
-    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 249, 236, 0.92);
+    box-shadow: var(--shadow-soft);
   }
 
   .menu-kicker {
@@ -169,8 +169,8 @@ const getItems = (section) => section.blocks.flatMap((block) => block.items);
 
   .stat-card {
     padding: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    border: 1px solid var(--line-soft);
+    background: rgba(255, 255, 255, 0.46);
   }
 
   .stat-card strong {
@@ -203,8 +203,8 @@ const getItems = (section) => section.blocks.flatMap((block) => block.items);
     justify-content: center;
     min-height: 58px;
     padding: 1rem 1.6rem;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: #fff;
+    border: 1px solid var(--line-strong);
+    color: var(--text-white);
     font-family: var(--font-heading);
     font-size: 1.05rem;
     letter-spacing: 0.04em;
@@ -227,10 +227,10 @@ const getItems = (section) => section.blocks.flatMap((block) => block.items);
   .preview-card {
     min-height: 280px;
     padding: 1.4rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line-soft);
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-      linear-gradient(160deg, rgba(250, 162, 39, 0.08), transparent 48%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.36)),
+      linear-gradient(160deg, rgba(250, 162, 39, 0.12), transparent 48%);
     transition:
       transform 0.32s ease,
       border-color 0.32s ease,
@@ -241,7 +241,7 @@ const getItems = (section) => section.blocks.flatMap((block) => block.items);
   .preview-card:hover {
     transform: translateY(-8px);
     border-color: rgba(250, 162, 39, 0.65);
-    box-shadow: 0 26px 40px rgba(0, 0, 0, 0.28);
+    box-shadow: var(--shadow-soft);
   }
 
   .preview-card-top {
@@ -271,7 +271,7 @@ const getItems = (section) => section.blocks.flatMap((block) => block.items);
   }
 
   .preview-price {
-    color: #f5d29c;
+    color: var(--brand-orange-deep);
     background: rgba(250, 162, 39, 0.12);
   }
 
@@ -297,7 +297,7 @@ const getItems = (section) => section.blocks.flatMap((block) => block.items);
   .preview-list li {
     position: relative;
     padding-left: 1rem;
-    color: #fff;
+    color: var(--text-white);
   }
 
   .preview-list li::before {
